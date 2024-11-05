@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const messages = ['React', 'Rails', 'JavaScript', 'PHP', 'C#'];
+      const [index, setIndex] = React.useState(0);
+
+      // 現在表示しているもの以外のメッセージをランダム表示
+      const changeMessage = () => {
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * messages.length);
+        } while (newIndex === index);
+        setIndex(newIndex);
+      };
+
+      return (
+        <div>
+          <h1>{messages[index]}</h1>
+          <button onClick={changeMessage}>メッセージを変更</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ currentMessage }}</h1>
+    <button @click="changeMessage">メッセージを変更</button>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          messages: ['Vue.js', 'Rails', 'JavaScript', 'PHP', 'C#'],
+          currentIndex: 0
+        };
+      },
+      computed: {
+        // messagesからcurrentIndexの位置のメッセージを返す
+        currentMessage() {
+          return this.messages[this.currentIndex];
+        }
+      },
+      methods: {
+        changeMessage() {
+          // 現在表示しているもの以外のメッセージをランダム表示
+          let newIndex;
+          do {
+            newIndex = Math.floor(Math.random() * this.messages.length);
+          } while (newIndex === this.currentIndex);
+          this.currentIndex = newIndex;
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+</html>
